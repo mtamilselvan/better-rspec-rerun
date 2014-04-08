@@ -1,6 +1,5 @@
 require 'rspec/core/rake_task'
 require 'rspec_junit_formatter'
-require 'securerandom'
 
 ALL_FAILURES = './all.failures'
 
