@@ -1,2 +1,2 @@
 --format RspecJunitFormatter
---out tmp/result<%= ENV['TEST_ENV_NUMBER'] %>.xml
+--out results/result<%= ENV['TEST_ENV_NUMBER'] %>.xml

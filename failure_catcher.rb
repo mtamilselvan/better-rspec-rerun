@@ -5,16 +5,10 @@ module RSpec
     module Formatters
       class FailureCatcher < BaseFormatter
 
-        def failures_file_name
-          num = ENV['TEST_ENV_NUMBER']
-          num = 1 if num.nil? || num.empty?
-          "rspec_#{num}.failures"
-        end
-
         # create files called rspec_#.failures with a list of failed examples
         def dump_failures
           return if failed_examples.empty?
-          f = File.new(failures_file_name, "w+")
+          f = File.new("rspec#{ENV['TEST_ENV_NUMBER']}.failures", "w+")
           failed_examples.each do |example|
             f.puts retry_command(example)
           end
