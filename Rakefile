@@ -21,21 +21,21 @@ def launch(params = {})
   system("parallel_rspec -n #{params[:processes] || 5} --test-options '#{params[:test_options]}' spec")
 end
 
-def run
-  launch(processes: 5, test_options: '--require ./failure_catcher.rb \
+def run(processes = 5)
+  launch(processes: processes, test_options: '--require ./failure_catcher.rb \
    --format RSpec::Core::Formatters::FailureCatcher')
 end
 
-def rerun
-  launch(processes: 5, test_options: gather_failures)
+def rerun(processes = 5)
+  launch(processes: processes, test_options: gather_failures)
 end
 
-desc "parallel with retries"
-task :parallel do
+desc "parallel test execution with failure retries"
+task :parallel, :processes do |t, args|
   cleanup 'results/*.xml'
-  run
+  run args[:processes]
   unless $?.success?
-    rerun
+    rerun args[:processes]
   end
   cleanup '*.failures'
 end
