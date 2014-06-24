@@ -25,7 +25,7 @@ end
 def run(processes = 5)
   launch(processes: processes,
     test_options: '--require ./failure_catcher.rb \
-    --format RSpec::Core::Formatters::FailureCatcher')
+    --format FailureCatcher')
 end
 
 def rerun(processes = 5)
