@@ -39,38 +39,3 @@ task :parallel, :processes do |t, args|
   end
   cleanup '*.failures'
 end
-
-#namespace :series do
-#  RSpec::Core::RakeTask.new('run') do |t|
-#    t.pattern = "spec/**_spec.rb"
-#    t.verbose = false
-#    t.fail_on_error = false
-#    t.rspec_opts = [
-#      "--require", "./failure_catcher.rb",
-#      "--format", "RSpec::Core::Formatters::FailureCatcher",
-#      "--format", "progress"
-#    ].flatten
-#  end
-#
-#  RSpec::Core::RakeTask.new('retry') do |t|
-#    failed_tests = gather_failures
-#    puts "Retrying #{failed_tests.split(/failed/).count - 1} failed tests!"
-#    t.pattern = "spec/**_spec.rb"
-#    t.verbose = false
-#    t.fail_on_error = false
-#    t.rspec_opts = [
-#      "-O", './all.failures',
-#      "--format", "progress"
-#    ].flatten
-#  end
-#
-#  desc 'full'
-#  task "full" do
-#    cleanup '.xml'
-#    Rake::Task["series:run"].execute
-#    unless $?.success?
-#      Rake::Task["series:retry"].execute
-#    end
-#    cleanup '.failures'
-#  end
-#end
