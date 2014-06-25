@@ -38,6 +38,6 @@ task :run_tests, :number_of_processes do |t, args|
   run args[:number_of_processes]
   unless $?.success?
     rerun args[:number_of_processes]
+    cleanup '*.failures'
   end
-  cleanup '*.failures'
 end
